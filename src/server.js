@@ -22,7 +22,7 @@ mongoose.connect('mongodb+srv://node-api:nodeapi123@cluster0-cegcb.mongodb.net/n
 
 app.use((req, res, next) => {
     req.io = io;
-    return next;
+    return next();
 });
 
 app.use(express.json());
