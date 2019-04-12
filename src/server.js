@@ -10,24 +10,24 @@ app.use(cors());
 const server = require('http').Server(app);
 const io = require('socket.io')(server);
 
-io.on('connection', socket => {
-    socket.on('connectRoom', box => {
-        socket.join(box);
-    })
+io.on('connection', (socket) => {
+  socket.on('connectRoom', (box) => {
+    socket.join(box);
+  });
 });
 
 mongoose.connect('mongodb+srv://node-api:nodeapi123@cluster0-cegcb.mongodb.net/nodeapi?retryWrites=true', {
-    useNewUrlParser: true,
+  useNewUrlParser: true,
 });
 
 app.use((req, res, next) => {
-    req.io = io;
-    return next();
+  req.io = io;
+  return next();
 });
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use('/files', express.static(path.resolve(__dirname, '..', 'temp')))
+app.use('/files', express.static(path.resolve(__dirname, '..', 'temp')));
 
 
 // Routes
